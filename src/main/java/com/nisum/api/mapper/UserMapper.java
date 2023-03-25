@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
-  public static User toDto(UserEntity userEntity) {
+  public static User toUserModel(UserEntity userEntity) {
     return User.builder()
         .id(userEntity.getId())
         .name(userEntity.getName())
@@ -17,12 +17,12 @@ public class UserMapper {
         .created(userEntity.getCreated())
         .modified(userEntity.getModified())
         .lastLogin(userEntity.getLastLogin())
-        .isActive(userEntity.getIsActive() == null ? Boolean.TRUE : Boolean.FALSE)
+        .isActive(userEntity.getIsActive() == null ? Boolean.FALSE : Boolean.TRUE)
         .token(userEntity.getToken())
         .build();
   }
 
-  public static UserEntity toEntity(User user) {
+  public static UserEntity toUserEntity(User user) {
     UserEntity userEntity = new UserEntity();
     userEntity.setId(user.getId());
     userEntity.setName(user.getName());
@@ -30,13 +30,13 @@ public class UserMapper {
     userEntity.setPassword(user.getPassword());
     userEntity.setCreated(user.getCreated());
     userEntity.setModified(user.getModified());
-    userEntity.setLastLogin(user.getLastLogin() != null ? user.getLastLogin() : user.getCreated());
+    userEntity.setLastLogin(user.getLastLogin());
     userEntity.setToken(user.getToken());
     userEntity.setIsActive(user.getIsActive() == null ? Boolean.TRUE : Boolean.FALSE);
     return userEntity;
   }
 
-  public static PhoneEntity toModelPhoneDTO(Phone phone) {
+  public static PhoneEntity toPhoneEntity(Phone phone) {
     PhoneEntity phoneEntity = new PhoneEntity();
     phoneEntity.setNumber(phone.getNumber());
     phoneEntity.setCityCode(phone.getCitycode());

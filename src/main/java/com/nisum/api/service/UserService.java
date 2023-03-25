@@ -1,6 +1,5 @@
 package com.nisum.api.service;
 
-import com.nisum.api.dto.request.UserRequestDTO;
 import com.nisum.api.dto.response.UserResponseDTO;
 import com.nisum.api.entity.UserEntity;
 import com.nisum.api.mapper.UserMapper;
@@ -34,7 +33,7 @@ public class UserService {
 
   public List<User> getUsers() {
     List<UserEntity> userData = userRepository.findAll();
-    return userData.stream().map(UserMapper::toDto).collect(Collectors.toList());
+    return userData.stream().map(UserMapper::toUserModel).collect(Collectors.toList());
   }
 
   public UserResponseDTO createUser(User user) {
@@ -42,20 +41,21 @@ public class UserService {
     util.validatePassword(user.getPassword());
 
     user.setId(UUID.randomUUID().toString());
-    user.setToken(UUID.randomUUID().toString());
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setCreated(LocalDate.now());
+    user.setLastLogin(user.getLastLogin() != null ? user.getLastLogin() : user.getCreated());
+    user.setToken(UUID.randomUUID().toString());
 
-    User getUser = UserMapper.toDto(userRepository.save(UserMapper.toEntity(user)));
+    User getUser = UserMapper.toUserModel(userRepository.save(UserMapper.toUserEntity(user)));
     if (getUser != null) {
       getUser.setPhones(user.getPhones());
       user.getPhones().forEach(p -> {
         Phone phones = new Phone();
+        phones.setNumber(p.getNumber());
         phones.setCitycode(p.getCitycode());
         phones.setCountrycode(p.getCountrycode());
-        phones.setNumber(p.getNumber());
         phones.setUserId(getUser.getId());
-        phoneRepository.save(UserMapper.toModelPhoneDTO(phones));
+        phoneRepository.save(UserMapper.toPhoneEntity(phones));
       });
     }
 
@@ -69,21 +69,22 @@ public class UserService {
     }
 
     user.setId(found.get().getId());
-    user.setToken(UUID.randomUUID().toString());
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setCreated(found.get().getCreated());
     user.setModified(LocalDate.now());
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setLastLogin(found.get().getLastLogin());
+    user.setToken(UUID.randomUUID().toString());
 
-    User getUser = UserMapper.toDto(userRepository.save(UserMapper.toEntity(user)));
+    User getUser = UserMapper.toUserModel(userRepository.save(UserMapper.toUserEntity(user)));
     if (getUser != null) {
       getUser.setPhones(user.getPhones());
       user.getPhones().forEach(p -> {
         Phone phones = new Phone();
+        phones.setNumber(p.getNumber());
         phones.setCitycode(p.getCitycode());
         phones.setCountrycode(p.getCountrycode());
-        phones.setNumber(p.getNumber());
         phones.setUserId(getUser.getId());
-        phoneRepository.save(UserMapper.toModelPhoneDTO(phones));
+        phoneRepository.save(UserMapper.toPhoneEntity(phones));
       });
     }
 
