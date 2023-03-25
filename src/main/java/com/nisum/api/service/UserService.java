@@ -67,11 +67,13 @@ public class UserService {
     if (found.isEmpty()) {
       throw new IllegalArgumentException();
     }
+
     user.setId(found.get().getId());
     user.setToken(UUID.randomUUID().toString());
     user.setCreated(found.get().getCreated());
     user.setModified(LocalDate.now());
     user.setPassword(passwordEncoder.encode(user.getPassword()));
+
     User getUser = UserMapper.toDto(userRepository.save(UserMapper.toEntity(user)));
     if (getUser != null) {
       getUser.setPhones(user.getPhones());
@@ -84,6 +86,7 @@ public class UserService {
         phoneRepository.save(UserMapper.toModelPhoneDTO(phones));
       });
     }
+
     return util.setResponse(user);
   }
 }
