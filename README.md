@@ -45,6 +45,9 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 La documentación de la API se puede acceder en la siguiente URL donde se encuentra la interfaz de Swagger para probar
 los endpoints de la API: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
+Para acceder a la base de datos y validar la persistencia se debe ingresar a través
+de: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+
 ### Validación de datos
 
 La API valida los datos enviados en las peticiones de creación de usuarios. Sí se envían datos incorrectos o
