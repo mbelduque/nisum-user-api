@@ -35,7 +35,7 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 
 2. Una vez que la aplicación se ha iniciado correctamente, podemos probar la API, utilizando alguna herramienta como
    Postman o curl. Por ejemplo, podemos enviar una solicitud POST a la
-   URL [http://localhost:8080/api/user](http://localhost:8080/api/user) con el cuerpo JSON que contenga los datos del
+   URL [http://localhost:8080/api/users](http://localhost:8080/api/users) con el cuerpo JSON que contenga los datos del
    usuario que queremos crear. La respuesta debe incluir un código de estado HTTP 201 y los datos del usuario recién
    creado. (se adjunta en la raíz la colección de Postman)
 
@@ -71,7 +71,7 @@ incompletos, se recibirá una respuesta de error con un mensaje indicando cuál 
 
 Obtiene la lista de usuarios y devuelve el estado `HTTP 200`, junto con los datos de los usuarios registrados.
 
-**Endpoint**: `/api/user`
+**Endpoint**: `/api/users`
 
 **Método HTTP**: `GET`
 
@@ -109,7 +109,7 @@ Obtiene la lista de usuarios y devuelve el estado `HTTP 200`, junto con los dato
 
 Crea un nuevo usuario y devuelve el estado `HTTP 201`, los datos del usuario recién creado, y campos adicionales.
 
-**Endpoint**: `/api/user`
+**Endpoint**: `/api/users`
 
 **Método HTTP**: `POST`
 
