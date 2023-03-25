@@ -5,7 +5,7 @@ import com.nisum.api.entity.PhoneEntity;
 import com.nisum.api.entity.UserEntity;
 import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
-import com.nisum.api.repository.PhoneRespository;
+import com.nisum.api.repository.PhoneRepository;
 import com.nisum.api.repository.UserRepository;
 import com.nisum.api.util.Util;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ class UserServiceTest {
   private UserRepository userRepositoryMock;
 
   @Mock
-  private PhoneRespository phoneRespositoryMock;
+  private PhoneRepository phoneRepositoryMock;
 
   @Mock
   private PasswordEncoder passwordEncoderMock;
@@ -82,7 +82,7 @@ class UserServiceTest {
     doNothing().when(utilMock).validatePassword(anyString());
 
     when(userRepositoryMock.save(any(UserEntity.class))).thenReturn(new UserEntity());
-    when(phoneRespositoryMock.save(any(PhoneEntity.class))).thenReturn(new PhoneEntity());
+    when(phoneRepositoryMock.save(any(PhoneEntity.class))).thenReturn(new PhoneEntity());
 
     // Mockear objeto UserResponseDTO que devuelve el método createUser()
     UserResponseDTO mockedUserResponseDTO = new UserResponseDTO();
@@ -98,6 +98,6 @@ class UserServiceTest {
     assertNotNull(result.getId());
     assertNotNull(result.getToken());
     verify(userRepositoryMock, times(2)).save(any(UserEntity.class));
-    verify(phoneRespositoryMock, times(2)).save(any(PhoneEntity.class));
+    verify(phoneRepositoryMock, times(2)).save(any(PhoneEntity.class));
   }
 }

@@ -5,7 +5,7 @@ import com.nisum.api.entity.UserEntity;
 import com.nisum.api.mapper.UserMapper;
 import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
-import com.nisum.api.repository.PhoneRespository;
+import com.nisum.api.repository.PhoneRepository;
 import com.nisum.api.repository.UserRepository;
 import com.nisum.api.util.Util;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +24,7 @@ public class UserService {
   @Autowired
   private UserRepository userRepository;
   @Autowired
-  private PhoneRespository phoneRespository;
+  private PhoneRepository phoneRepository;
   @Autowired
   private PasswordEncoder passwordEncoder;
   @Autowired
@@ -53,7 +53,7 @@ public class UserService {
         phones.setCountrycode(p.getCountrycode());
         phones.setNumber(p.getNumber());
         phones.setUserId(getUser.getId());
-        phoneRespository.save(UserMapper.toModelPhoneDTO(phones));
+        phoneRepository.save(UserMapper.toModelPhoneDTO(phones));
       });
     }
 
