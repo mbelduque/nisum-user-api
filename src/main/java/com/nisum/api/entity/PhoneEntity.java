@@ -14,6 +14,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.FetchType;
 import javax.persistence.GenerationType;
 
+/**
+ * Clase que representa la entidad Phone en la base de datos.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

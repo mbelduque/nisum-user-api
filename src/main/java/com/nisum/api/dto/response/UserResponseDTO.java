@@ -2,9 +2,9 @@ package com.nisum.api.dto.response;
 
 import com.nisum.api.model.Phone;
 
-import lombok.Getter;
-import lombok.Setter;
+
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
@@ -12,8 +12,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Getter
-@Setter
+/**
+ * DTO para la respuesta con la información de usuarios.
+ * Contiene la información saliente del usuario con campos adicionales.
+ */
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)

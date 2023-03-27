@@ -10,6 +10,10 @@ import javax.validation.constraints.NotEmpty;
 
 import java.util.List;
 
+/**
+ * DTO para la petición con la información de usuarios.
+ * Contiene la información entrante del usuario.
+ */
 @Data
 public class UserRequestDTO {
   private String userId;

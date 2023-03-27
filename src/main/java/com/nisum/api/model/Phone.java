@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase que representa el modelo teléfono.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

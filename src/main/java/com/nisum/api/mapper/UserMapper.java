@@ -6,8 +6,18 @@ import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
 import org.springframework.stereotype.Component;
 
+/**
+ * Clase para mapear entre los modelos y entidades de usuario y teléfono.
+ */
 @Component
 public class UserMapper {
+
+  /**
+   * Convierte una entidad de usuario en un modelo de usuario.
+   *
+   * @param userEntity La entidad de usuario a convertir.
+   * @return User modelo de usuario correspondiente.
+   */
   public static User toUserModel(UserEntity userEntity) {
     return User.builder()
         .id(userEntity.getId())
@@ -22,6 +32,12 @@ public class UserMapper {
         .build();
   }
 
+  /**
+   * Convierte un modelo de usuario en una entidad de usuario.
+   *
+   * @param user El modelo de usuario a convertir.
+   * @return UserEntity entidad de usuario correspondiente.
+   */
   public static UserEntity toUserEntity(User user) {
     UserEntity userEntity = new UserEntity();
     userEntity.setId(user.getId());
@@ -36,6 +52,12 @@ public class UserMapper {
     return userEntity;
   }
 
+  /**
+   * Convierte un modelo de teléfono en una entidad de teléfono.
+   *
+   * @param phone El modelo de teléfono a convertir.
+   * @return PhoneEntity entidad de teléfono correspondiente.
+   */
   public static PhoneEntity toPhoneEntity(Phone phone) {
     PhoneEntity phoneEntity = new PhoneEntity();
     phoneEntity.setNumber(phone.getNumber());

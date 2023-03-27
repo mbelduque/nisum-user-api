@@ -13,6 +13,9 @@ import javax.persistence.Column;
 
 import java.time.LocalDate;
 
+/**
+ * Clase que representa la entidad User en la base de datos.
+ */
 @Getter
 @Setter
 @ToString
