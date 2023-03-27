@@ -48,6 +48,10 @@ los endpoints de la API: [http://localhost:8080/swagger-ui/index.html](http://lo
 Para acceder a la base de datos y validar la persistencia se debe ingresar a través
 de: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 
+credenciales H2 console
+* usuario: nisum
+* contraseña: nisum
+
 ### Validación de datos
 
 La API valida los datos enviados en las peticiones de creación de usuarios. Sí se envían datos incorrectos o
