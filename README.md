@@ -34,21 +34,24 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
    `2. IDE: Menú Run -> Run -> UserApiApplication`
 
 2. Una vez que la aplicación se ha iniciado correctamente, podemos probar la API, utilizando alguna herramienta como
-   Postman o curl. Por ejemplo, podemos enviar una solicitud POST a la
-   URL [http://localhost:8080/api/users](http://localhost:8080/api/users) con el cuerpo JSON que contenga los datos del
-   usuario que queremos crear. La respuesta debe incluir un código de estado HTTP 201 y los datos del usuario recién
+   Postman o curl. Por ejemplo, podemos enviar una solicitud POST al endpoint con el cuerpo JSON que contenga los datos
+   del usuario que queremos crear. La respuesta debe incluir un código de estado HTTP 201 y los datos del usuario recién
    creado. (se adjunta en la raíz la colección de Postman)
 
 3. También podemos probar las otras operaciones de la API (GET, POST) utilizando las URL correspondientes y los
    parámetros necesarios.
 
-La documentación de la API se puede acceder en la siguiente URL donde se encuentra la interfaz de Swagger para probar
-los endpoints de la API: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+### URL's
 
-Para acceder a la base de datos y validar la persistencia se debe ingresar a través
-de: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+La documentación de la API se puede acceder en la URL donde se encuentra la interfaz de Swagger para probar
+los endpoints, igualmente para acceder a la base de datos y validar la persistencia se debe ingresar a través
+de la consola de H2 
 
-credenciales H2 console
+* Endpoint: [http://localhost:8080/api/users](http://localhost:8080/api/users)
+* Swagger: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+* H2 console: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
+  
+#### Credenciales H2 console
 * usuario: nisum
 * contraseña: nisum
 
