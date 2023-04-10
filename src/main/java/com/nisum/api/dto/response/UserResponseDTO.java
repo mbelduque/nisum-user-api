@@ -25,7 +25,7 @@ public class UserResponseDTO {
   private String name;
   private String email;
   private String password;
-  private List<Phone> phones;
+  private List<PhoneResponseDTO> phones;
   private LocalDate created;
   private LocalDate modified;
   private LocalDate lastLogin;

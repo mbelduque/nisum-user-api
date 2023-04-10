@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +35,8 @@ public class UserEntity {
   @Column(name = "password")
   private String password;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<PhoneEntity> phones;
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<PhoneEntity> phones = new ArrayList<>();
 
   @Column(name = "created")
   private LocalDate created;

@@ -6,6 +6,8 @@ import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 /**
  * Clase para mapear entre los modelos y entidades de usuario y teléfono.
  */
@@ -24,6 +26,13 @@ public class UserMapper {
         .name(userEntity.getName())
         .email(userEntity.getEmail())
         .password(userEntity.getPassword())
+        .phones(userEntity.getPhones().stream().map(phoneEntity ->
+                Phone.builder()
+                    .number(phoneEntity.getNumber())
+                    .citycode(phoneEntity.getCityCode())
+                    .countrycode(phoneEntity.getCountryCode())
+                    .build())
+            .collect(Collectors.toList()))
         .created(userEntity.getCreated())
         .modified(userEntity.getModified())
         .lastLogin(userEntity.getLastLogin())

@@ -1,20 +1,16 @@
-package com.nisum.api.model;
+package com.nisum.api.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Clase que representa el modelo teléfono.
- */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder(toBuilder = true)
-public class Phone {
+public class PhoneResponseDTO {
   private String number;
   private String citycode;
   private String countrycode;
-  private String userId;
 }

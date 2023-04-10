@@ -1,6 +1,8 @@
 package com.nisum.api.service;
 
+import com.nisum.api.dto.response.PhoneResponseDTO;
 import com.nisum.api.dto.response.UserResponseDTO;
+import com.nisum.api.entity.PhoneEntity;
 import com.nisum.api.entity.UserEntity;
 import com.nisum.api.mapper.UserMapper;
 import com.nisum.api.model.Phone;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,22 +72,21 @@ public class UserService {
     user.setLastLogin(user.getLastLogin() != null ? user.getLastLogin() : user.getCreated());
     user.setToken(UUID.randomUUID().toString());
 
-    // Guarda el usuario y sus teléfonos correspondientes en la base de datos
-    User getUser = UserMapper.toUserModel(userRepository.save(UserMapper.toUserEntity(user)));
-    if (getUser != null) {
-      getUser.setPhones(user.getPhones());
-      user.getPhones().forEach(p -> {
-        Phone phones = new Phone();
-        phones.setNumber(p.getNumber());
-        phones.setCitycode(p.getCitycode());
-        phones.setCountrycode(p.getCountrycode());
-        phones.setUserId(getUser.getId());
-        phoneRepository.save(UserMapper.toPhoneEntity(phones));
-      });
-    }
+    // Guarda el usuario en la base de datos
+    UserEntity userEntity = UserMapper.toUserEntity(user);
+    userEntity.setPhones(user.getPhones().stream().map(p -> {
+      PhoneEntity phoneEntity = UserMapper.toPhoneEntity(p);
+      phoneEntity.setUser(userEntity);
+      return phoneEntity;
+    }).collect(Collectors.toList()));
+
+    UserEntity savedUser = userRepository.save(userEntity);
+
+    // Convierte el UserEntity a un User para poder retornarlo en el response
+    User createdUser = UserMapper.toUserModel(savedUser);
 
     // Arma y devuelve la respuesta
-    return setResponse(user);
+    return setResponse(createdUser);
   }
 
   /**
@@ -176,17 +178,28 @@ public class UserService {
    * @return UserResponseDTO DTO de respuesta de usuario
    */
   private UserResponseDTO setResponse(User user) {
+    List<PhoneResponseDTO> phones = new ArrayList<>();
+    if (user.getPhones() != null) {
+      user.getPhones().forEach(p -> {
+        phones.add(PhoneResponseDTO.builder()
+            .number(p.getNumber())
+            .citycode(p.getCitycode())
+            .countrycode(p.getCountrycode())
+            .build());
+      });
+    }
+
     return UserResponseDTO.builder()
         .id(UUID.fromString(user.getId()))
         .name(user.getName())
         .email(user.getEmail())
         .password(user.getPassword())
-        .phones(user.getPhones())
+        .phones(phones)
         .created(user.getCreated())
         .modified(user.getModified())
         .lastLogin(user.getLastLogin() != null ? user.getLastLogin() : user.getCreated())
         .token(user.getToken())
-        .isActive(user.getIsActive() == null ? Boolean.TRUE : Boolean.FALSE)
+        .isActive(user.getIsActive() != null && user.getIsActive())
         .build();
   }
 }

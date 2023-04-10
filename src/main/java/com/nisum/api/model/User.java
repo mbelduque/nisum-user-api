@@ -22,7 +22,7 @@ public class User {
   private String password;
   private List<Phone> phones;
   private LocalDate created;
-  private LocalDate modified;
+  private LocalDate modified = null;
   private LocalDate lastLogin;
   private String token;
   private Boolean isActive;
