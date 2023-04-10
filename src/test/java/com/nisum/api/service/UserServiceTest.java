@@ -1,7 +1,6 @@
 package com.nisum.api.service;
 
 import com.nisum.api.dto.response.UserResponseDTO;
-import com.nisum.api.entity.PhoneEntity;
 import com.nisum.api.entity.UserEntity;
 import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
@@ -73,8 +72,11 @@ class UserServiceTest {
   void createUser_returnsUserResponseDTO() {
     // Mockear dependencias externas
     when(mockedPasswordEncoder.encode(anyString())).thenReturn("encodedPassword");
-    when(mockedUserRepository.save(any(UserEntity.class))).thenReturn(new UserEntity());
-    when(mockedPhoneRepository.save(any(PhoneEntity.class))).thenReturn(new PhoneEntity());
+    when(mockedUserRepository.save(any(UserEntity.class))).thenAnswer(invocation -> {
+      UserEntity savedUser = invocation.getArgument(0);
+      savedUser.setId("761604b9-81cb-4152-8a2b-3afcef0cee16");
+      return savedUser;
+    });
 
     // Ejecutar método a probar
     UserResponseDTO result = userService.createUser(mockedUser);
@@ -87,6 +89,5 @@ class UserServiceTest {
     assertEquals(result.getEmail(), mockedUser.getEmail());
     assertEquals(result.getPhones().size(), mockedUser.getPhones().size());
     verify(mockedUserRepository, times(1)).save(any(UserEntity.class));
-    verify(mockedPhoneRepository, times(1)).save(any(PhoneEntity.class));
   }
 }
