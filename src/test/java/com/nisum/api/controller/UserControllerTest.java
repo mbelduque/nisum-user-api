@@ -55,9 +55,10 @@ public class UserControllerTest {
     when(userService.getUsers()).thenReturn(users);
 
     // Realizar petición GET a la URL /api/user
-    mockMvc.perform(get("/api/user"))
+    mockMvc.perform(get("/api/users"))
         .andExpect(status().isOk())
-        .andExpect(content().json(asJsonString(users), true));
+        .andExpect(content().json(asJsonString(users), true))
+        .andExpect(result -> assertEquals(200, result.getResponse().getStatus()));
 
     // Verificar que el método getUsers() del UserService fue llamado una vez
     verify(userService, times(1)).getUsers();
@@ -81,10 +82,11 @@ public class UserControllerTest {
     userRequestDTO.setPhones(phones);
 
     // Realizar la petición POST
-    mockMvc.perform(MockMvcRequestBuilders.post("/api/user")
+    mockMvc.perform(MockMvcRequestBuilders.post("/api/users")
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(userRequestDTO)))
-        .andExpect(status().isCreated());
+        .andExpect(status().isCreated())
+        .andExpect(result -> assertEquals(201, result.getResponse().getStatus()));
 
     // Verificar que se llamó al servicio con el objeto User correspondiente
     ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
