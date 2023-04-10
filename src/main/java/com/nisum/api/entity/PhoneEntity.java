@@ -5,14 +5,7 @@ import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.GeneratedValue;
-import javax.persistence.FetchType;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 /**
  * Clase que representa la entidad Phone en la base de datos.
@@ -37,6 +30,7 @@ public class PhoneEntity {
   @Column(name = "countrycode")
   private String countryCode;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  private UserEntity userEntity;
+  @ManyToOne(targetEntity = UserEntity.class)
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  private UserEntity user;
 }

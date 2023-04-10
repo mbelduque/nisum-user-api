@@ -6,12 +6,10 @@ import lombok.ToString;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.Column;
+import javax.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Clase que representa la entidad User en la base de datos.
@@ -35,6 +33,9 @@ public class UserEntity {
 
   @Column(name = "password")
   private String password;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<PhoneEntity> phones;
 
   @Column(name = "created")
   private LocalDate created;

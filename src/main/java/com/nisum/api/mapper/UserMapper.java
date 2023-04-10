@@ -65,7 +65,7 @@ public class UserMapper {
     phoneEntity.setCountryCode(phone.getCountrycode());
     UserEntity userEntity = new UserEntity();
     userEntity.setId(phone.getUserId());
-    phoneEntity.setUserEntity(userEntity);
+    phoneEntity.setUser(userEntity);
     return phoneEntity;
   }
 }

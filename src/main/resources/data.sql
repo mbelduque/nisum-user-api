@@ -1,5 +1,5 @@
 CREATE TABLE users(
-    id UUID NOT NULL,
+    id UUID PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(30) NOT NULL,
     password VARCHAR(100) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE phones(
     number VARCHAR(20) NOT NULL,
     citycode VARCHAR(2) NOT NULL,
     countrycode VARCHAR(2) NOT NULL,
-    USER_ID UUID NOT NULL
+    USER_ID UUID NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (USER_ID) REFERENCES users(id)
 );
-
-
