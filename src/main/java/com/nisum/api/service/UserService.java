@@ -55,7 +55,7 @@ public class UserService {
   }
 
   /**
-   * Crea un nuevo usuario.
+   * Crea un nuevo usuario con una lista de telefonos.
    *
    * @param user Usuario a crear.
    * @return UserResponseDTO DTO de respuesta con información del usuario creado.
