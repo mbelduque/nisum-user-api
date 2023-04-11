@@ -5,7 +5,6 @@ import com.nisum.api.dto.response.UserResponseDTO;
 import com.nisum.api.entity.PhoneEntity;
 import com.nisum.api.entity.UserEntity;
 import com.nisum.api.mapper.UserMapper;
-import com.nisum.api.model.Phone;
 import com.nisum.api.model.User;
 import com.nisum.api.repository.PhoneRepository;
 import com.nisum.api.repository.UserRepository;
@@ -99,7 +98,7 @@ public class UserService {
     // Busca si existe un usuario con el email dado
     Optional<UserEntity> found = userRepository.findByEmail(user.getEmail());
     if (found.isEmpty()) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("No se encontró ningún usuario con el email " + user.getEmail());
     }
 
     // Actualiza los datos del usuario
@@ -113,22 +112,21 @@ public class UserService {
     user.setLastLogin(found.get().getLastLogin());
     user.setToken(found.get().getToken());
 
-    // Guarda los cambios del usuario en la base de datos y guarda los teléfonos del usuario
-    User getUser = UserMapper.toUserModel(userRepository.save(UserMapper.toUserEntity(user)));
-    if (getUser != null) {
-      getUser.setPhones(user.getPhones());
-      user.getPhones().forEach(p -> {
-        Phone phones = new Phone();
-        phones.setNumber(p.getNumber());
-        phones.setCitycode(p.getCitycode());
-        phones.setCountrycode(p.getCountrycode());
-        phones.setUserId(getUser.getId());
-        phoneRepository.save(UserMapper.toPhoneEntity(phones));
-      });
-    }
+    // Guarda el usuario en la base de datos
+    UserEntity userEntity = UserMapper.toUserEntity(user);
+    userEntity.setPhones(user.getPhones().stream().map(p -> {
+      PhoneEntity phoneEntity = UserMapper.toPhoneEntity(p);
+      phoneEntity.setUser(userEntity);
+      return phoneEntity;
+    }).collect(Collectors.toList()));
 
-    // Arma y devuelve la información actualizada del usuario
-    return setResponse(user);
+    UserEntity modifiedUser = userRepository.save(userEntity);
+
+    // Convierte el UserEntity a un User para poder retornarlo en el response
+    User updatedUser = UserMapper.toUserModel(modifiedUser);
+
+    // Arma y devuelve la respuesta
+    return setResponse(updatedUser);
   }
 
   /**
