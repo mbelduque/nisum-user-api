@@ -154,8 +154,7 @@ Crea un nuevo usuario y devuelve el estado `HTTP 201`, los datos del usuario rec
       {
         "number": "string",
         "citycode": "string",
-        "countrycode": "string",
-        "userId": "string"
+        "countrycode": "string"
       }
     ],
     "created": "date",
