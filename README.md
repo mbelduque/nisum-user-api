@@ -15,19 +15,19 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 
    `https://github.com/mbelduque/nisum-user-api.git`
 
-2. Importar el proyecto en tu IDE de preferencia (por ejemplo, IntelliJ IDEA) desde el archivo
+2. Importar el proyecto en el IDE de preferencia (por ejemplo, IntelliJ IDEA) desde el archivo
 
    `/nisum-user-api/pom.xml`
 
-3. Compilar y empaquetar el proyecto con Maven, o desde tu IDE:
+3. Compilar y empaquetar el proyecto con Maven, o desde el IDE:
 
-   `1. Maven: cd tu-repositorio mvn clean package`
+   `1. Maven: cd repositorio mvn clean package`
 
    `2. IDE: Menú Maven -> userEntity-Api -> lifecycle / clean -> package -> install`
 
 ## Cómo probar la API
 
-1. Iniciar la aplicación con Maven, o desde tu IDE:
+1. Iniciar la aplicación con Maven, o desde el IDE:
 
    `1. Maven: mvn spring-boot:run`
 
