@@ -15,7 +15,7 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 
    `https://github.com/mbelduque/nisum-user-api.git`
 
-2. Importar el proyecto en el IDE de preferencia (por ejemplo, IntelliJ IDEA) desde el archivo
+2. Importar el proyecto en el IDE desde el archivo
 
    `/nisum-user-api/pom.xml`
 
@@ -36,7 +36,7 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 2. Una vez que la aplicación se ha iniciado correctamente, podemos probar la API, utilizando alguna herramienta como
    Postman o curl. Por ejemplo, podemos enviar una solicitud POST al endpoint con el cuerpo JSON que contenga los datos
    del usuario que queremos crear. La respuesta debe incluir un código de estado HTTP 201 y los datos del usuario recién
-   creado. (se adjunta en la raíz la colección de Postman)
+   creado. (se adjunta la colección de Postman en la raíz del proyecto)
 
 3. También podemos probar las otras operaciones de la API (GET, POST) utilizando las URL correspondientes y los
    parámetros necesarios.
