@@ -45,13 +45,14 @@ crear usuarios junto con una lista de teléfonos. Los usuarios creados se almace
 
 La documentación de la API se puede acceder en la URL donde se encuentra la interfaz de Swagger para probar
 los endpoints, igualmente para acceder a la base de datos y validar la persistencia se debe ingresar a través
-de la consola de H2 
+de la consola de H2
 
 * Endpoint: [http://localhost:8080/api/users](http://localhost:8080/api/users)
 * Swagger: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 * H2 console: [http://localhost:8080/h2-console](http://localhost:8080/h2-console)
-  
+
 #### Credenciales H2 console
+
 * usuario: nisum
 * contraseña: nisum
 
@@ -99,8 +100,7 @@ Obtiene la lista de usuarios y devuelve el estado `HTTP 200`, junto con los dato
       {
         "number": "string",
         "citycode": "string",
-        "countrycode": "string",
-        "userId": "string"
+        "countrycode": "string"
       }
     ],
     "created": "date",
