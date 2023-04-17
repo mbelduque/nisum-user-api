@@ -28,7 +28,7 @@ public class UserController {
    * @return una lista de objetos User en el cuerpo de la respuesta HTTP
    */
   @GetMapping
-  public ResponseEntity<List<User>> getUsers() {
+  public ResponseEntity<List<UserResponseDTO>> getUsers() {
     return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
   }
 

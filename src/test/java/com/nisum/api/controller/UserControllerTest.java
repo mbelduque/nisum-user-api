@@ -51,7 +51,7 @@ public class UserControllerTest {
   @Test
   public void getUsers_shouldReturnOk() throws Exception {
     // Mockear la respuesta del UserService
-    List<User> users = Arrays.asList(new User(), new User());
+    List<UserResponseDTO> users = Arrays.asList(new UserResponseDTO(), new UserResponseDTO());
     when(userService.getUsers()).thenReturn(users);
 
     // Realizar petición GET a la URL /api/user

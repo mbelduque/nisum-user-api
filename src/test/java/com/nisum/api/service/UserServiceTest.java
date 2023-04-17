@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -54,16 +55,22 @@ class UserServiceTest {
     mockedUser.setPassword("123Acb144*");
     mockedUser.setPhones(new ArrayList<>());
     mockedUser.getPhones().add(mockedPhone);
+
+    mockedUserEntity = new UserEntity();
+    mockedUserEntity.setId("788589f5-fc9b-4cbe-8535-328bdc723456");
+    mockedUserEntity.setName("Test User");
+    mockedUserEntity.setEmail("test@nisum.com");
   }
 
   @Test
   void getUsers_returnsListOfUsers() {
     //given
-    List<UserEntity> userList = new ArrayList<>();
-    userList.add(mockedUserEntity);
+    List<UserEntity> userList = Collections.singletonList(mockedUserEntity);
     when(mockedUserRepository.findAll()).thenReturn(userList);
+
     //when
-    List<User> users = userService.getUsers();
+    List<UserResponseDTO> users = userService.getUsers();
+
     //then
     assertEquals(users.size(), 1);
   }

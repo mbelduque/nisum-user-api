@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -48,9 +45,13 @@ public class UserService {
    *
    * @return Lista de usuarios.
    */
-  public List<User> getUsers() {
-    List<UserEntity> userData = userRepository.findAll();
-    return userData.stream().map(UserMapper::toUserModel).collect(Collectors.toList());
+  public List<UserResponseDTO> getUsers() {
+    List<UserEntity> userEntityList = userRepository.findAll();
+
+    return userEntityList.stream()
+        .map(UserMapper::toUserModel)
+        .map(this::setResponse)
+        .collect(Collectors.toList());
   }
 
   /**
