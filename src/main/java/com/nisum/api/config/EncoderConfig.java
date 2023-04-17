@@ -3,6 +3,7 @@ package com.nisum.api.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Clase de configuración para encriptar contraseñas con BCryptPasswordEncoder.
@@ -15,7 +16,7 @@ public class EncoderConfig {
    * @return bean de BCryptPasswordEncoder.
    */
   @Bean
-  public org.springframework.security.crypto.password.PasswordEncoder encoder() {
+  public PasswordEncoder encoder() {
     return new BCryptPasswordEncoder();
   }
 }
