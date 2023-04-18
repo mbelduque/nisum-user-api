@@ -2,7 +2,6 @@ package com.nisum.api.controller;
 
 import com.nisum.api.dto.request.UserRequestDTO;
 import com.nisum.api.dto.response.UserResponseDTO;
-import com.nisum.api.model.User;
 import com.nisum.api.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
