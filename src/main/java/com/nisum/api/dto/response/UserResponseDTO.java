@@ -1,8 +1,5 @@
 package com.nisum.api.dto.response;
 
-import com.nisum.api.model.Phone;
-
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
