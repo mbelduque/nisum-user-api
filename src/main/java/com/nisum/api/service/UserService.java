@@ -97,21 +97,21 @@ public class UserService {
    */
   public UserResponseDTO updateUser(User user) {
     // Busca si existe un usuario con el email dado
-    Optional<UserEntity> found = userRepository.findByEmail(user.getEmail());
-    if (found.isEmpty()) {
+    Optional<UserEntity> userFound = userRepository.findByEmail(user.getEmail());
+    if (userFound.isEmpty()) {
       throw new IllegalArgumentException("No se encontró ningún usuario con el email " + user.getEmail());
     }
 
     // Actualiza los datos del usuario
-    user.setId(found.get().getId());
+    user.setId(userFound.get().getId());
     user.setName(user.getName());
     user.setEmail(user.getEmail());
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     user.setPhones(user.getPhones());
-    user.setCreated(found.get().getCreated());
+    user.setCreated(userFound.get().getCreated());
     user.setModified(LocalDate.now());
-    user.setLastLogin(found.get().getLastLogin());
-    user.setToken(found.get().getToken());
+    user.setLastLogin(userFound.get().getLastLogin());
+    user.setToken(userFound.get().getToken());
 
     // Guarda el usuario en la base de datos
     UserEntity userEntity = UserMapper.toUserEntity(user);
