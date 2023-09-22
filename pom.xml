@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.nisum</groupId>
     <artifactId>api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>userEntity-api</name>
     <description>Demo project for Nisum Test</description>
     <properties>

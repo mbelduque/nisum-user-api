@@ -1,4 +1,4 @@
-package com.nisum.api.mapper;
+package com.nisum.api.util.mapper;
 
 import com.nisum.api.entity.PhoneEntity;
 import com.nisum.api.entity.UserEntity;
